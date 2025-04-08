@@ -1,0 +1,10 @@
+{block content}
+<div class="container mt-5">
+    <a n:href="Sign:out" class="btn btn-primary">Odhlásit se</a>
+    {if !$user->isAllowed("editUser")}
+        <a n:href="editUser, $user->getId()">Upravit mé údaje</a>
+    {/if}
+    {control usersGrid}
+    </div>
+    
+{/block}

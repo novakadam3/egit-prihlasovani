@@ -1,0 +1,86 @@
+{block content}
+{form form}
+    <div n:foreach="$form->getOwnErrors() as $error" class="flash alert alert-danger mt-3 mb-2">{$error}</div>
+    <div class="form-group">
+        {label name, class => "required" /}
+        {input name, class => 'form-control', placeholder => 'Zadejte Jméno'}
+        {if $form['name']->hasErrors()}
+            <div class="text-danger">
+                {foreach $form['name']->getErrors() as $error}
+                    {$error}
+                {/foreach}
+            </div>
+        {/if}
+    </div>
+    <div class="form-group">
+        {label surname, class => "required" /}
+        {input surname, class => 'form-control', placeholder => 'Zadejte Příjmení'}{if $form['name']->hasErrors()}
+            <div class="text-danger">
+                {foreach $form['surname']->getErrors() as $error}
+                    {$error}
+                {/foreach}
+            </div>
+        {/if}
+    </div>
+    <div class="form-group">
+        <div n:class="$form[username]->hasErrors() ? 'error'">
+            {inputError username}
+        </div>
+        {label username, class => "required" /}
+        {input username, class => 'form-control', placeholder => 'Zadejte uživatelské jméno'}
+        {if $form['username']->hasErrors()}
+            <div class="text-danger">
+                {foreach $form['username']->getErrors() as $error}
+                    {$error}
+                {/foreach}
+            </div>
+        {/if}
+
+    </div>
+    <div class="form-group">
+        {label email, class => "required" /}
+        {input email, class => 'form-control', placeholder => 'Zadejte uživatelské email'}
+        {if $form['email']->hasErrors()}
+            <div class="text-danger">
+                {foreach $form['email']->getErrors() as $error}
+                    {$error}
+                {/foreach}
+            </div>
+        {/if}
+    </div>
+    <div class="form-group">
+        {label phone, class => "required" /}
+        {input phone, class => 'form-control', placeholder => 'Zadejte uživatelské tel. číslo'}
+        {if $form['phone']->hasErrors()}
+            <div class="text-danger">
+                {foreach $form['phone']->getErrors() as $error}
+                    {$error}
+                {/foreach}
+            </div>
+        {/if}
+    </div>
+    <div class="form-group">
+        {label password, class => "required" /}
+        {input password, class => 'form-control', placeholder => 'Zadejte heslo'}
+        {if $form['password']->hasErrors()}
+            <div class="text-danger">
+                {foreach $form['password']->getErrors() as $error}
+                    {$error}
+                {/foreach}
+            </div>
+        {/if}
+    </div>
+    <div class="form-group">
+        {label password2, class => "required" /}
+        {input password2, class => 'form-control', placeholder => 'Zadejte heslo pro kontrolu'}
+        {if $form['password2']->hasErrors()}
+            <div class="text-danger">
+                {foreach $form['password2']->getErrors() as $error}
+                    {$error}
+                {/foreach}
+            </div>
+        {/if}
+    </div>
+    {input submit, class => "btn btn-primary"}
+{/form}
+{/block}
