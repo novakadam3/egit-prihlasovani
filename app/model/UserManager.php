@@ -4,9 +4,6 @@ namespace App\Model;
 
 use Nette;
 use Nette\Security\Passwords;
-use Nette\Security\IIdentity;
-use Nette\Security\SimpleIdentity;
-use UserModel;
 use UsersModel;
 
 /**
@@ -36,13 +33,13 @@ class UserManager implements Nette\Security\Authenticator
 	 */
 	public function authenticate(string $username, string $password): Nette\Security\IIdentity
 	{
-		if(!$username || !$password) {
+		if(!$username || !$password) { // pokud není uživatelské jméno nebo heslo
             throw new Nette\Security\AuthenticationException('Uživatelské jméno nebo heslo nejsou zadané', self::InvalidCredential);
 		}
 	
         $passwords = new Passwords();
         $row = $this->usersModel->getRows()->where("username = ?", $username)->fetch(); // našlo uživatele?
-		if (is_null($row)) { // pokud nenašlo
+		if (is_null($row)) { // pokud se nenašel řádek v DB podle username
 			throw new Nette\Security\AuthenticationException('Uživatel neexistuje', self::IdentityNotFound);
 		}
         if($row->is_active == 0) { // pokud je uživatel neaktivní

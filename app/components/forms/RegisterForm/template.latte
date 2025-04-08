@@ -14,7 +14,8 @@
     </div>
     <div class="form-group">
         {label surname, class => "required" /}
-        {input surname, class => 'form-control', placeholder => 'Zadejte Příjmení'}{if $form['name']->hasErrors()}
+        {input surname, class => 'form-control', placeholder => 'Zadejte Příjmení'}
+        {if $form['surname']->hasErrors()}
             <div class="text-danger">
                 {foreach $form['surname']->getErrors() as $error}
                     {$error}
@@ -23,9 +24,6 @@
         {/if}
     </div>
     <div class="form-group">
-        <div n:class="$form[username]->hasErrors() ? 'error'">
-            {inputError username}
-        </div>
         {label username, class => "required" /}
         {input username, class => 'form-control', placeholder => 'Zadejte uživatelské jméno'}
         {if $form['username']->hasErrors()}

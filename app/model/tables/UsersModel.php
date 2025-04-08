@@ -3,7 +3,7 @@
 use Nette\Database\Explorer;
 
 /**
- * UserModel
+ * UsersModel
  *
  * 
  */
@@ -14,6 +14,4 @@ class UsersModel extends Repository\MainRepository
     {
         parent::__construct( $db, "users" );
     }
-
-    
 }

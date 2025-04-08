@@ -18,7 +18,6 @@ final class HomePresenter extends Nette\Application\UI\Presenter
     )
     {
         parent::__construct();
-        $this->addComponent($this->editUserForm, "editUserForm");
     }
     public function startup(): void
     {
@@ -30,24 +29,23 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 
     public function renderEditUser($userId){
         $user = $this->usersModel->getById($userId);
-        if(is_null($user)){
+        if(is_null($user)){ // uživatel s daným id neexistuje
             $this->flashMessage("Uživatel neexistuje.", "danger");
             $this->redirect("default");
         }
         if($this->getUser()->getId() != $userId && !$this->getUser()->isAllowed("editUser")){
             $this->flashMessage("Nemáte oprávnění editovat tohoto uživatele.", "danger");
-            $this->redirect("Home:default");
+            $this->error("Nemáte oprávnění editovat tohoto uživatele.", 403);
         }
         $this->editUserForm->fillData($user);
-    }
-
-    public function renderDefault(): void
-    {
-        $httpRequest = $this->getHttpRequest();
     }
 
     public function createComponentUsersGrid(): UsersGrid
     {
         return $this->usersGrid;
+    }
+    public function createComponentEditUserForm()
+    {
+        return $this->editUserForm;
     }
 }
